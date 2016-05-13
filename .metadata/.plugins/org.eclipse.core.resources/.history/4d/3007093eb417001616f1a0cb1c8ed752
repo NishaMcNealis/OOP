@@ -1,0 +1,138 @@
+package InProgress;
+
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+//import InProgress.StartScreen.MyMouseListener;
+
+public class StartScreen extends JFrame implements ActionListener{
+	/** Height of the game frame. */
+	private static final int DEFAULT_HEIGHT = 302;
+	/** Width of the game frame. */
+	private static final int DEFAULT_WIDTH = 800;
+	private static final int BUTTON_TOP = 10;
+	/** x coord of the "Replace" button. */
+	private static final int BUTTON_LEFT = 570;
+	/** Distance between the tops of the "Replace" and "Restart" buttons. */
+	private static final int BUTTON_HEIGHT_INC = 50;
+	/** The main panel containing the game components. */
+	private JPanel panel;
+	/** The Start button. */
+	private JButton startButton;
+
+	/**
+	 * Initialize the GUI.
+	 * @param gameBoard is a <code>Board</code> subclass.
+	 */
+	public StartScreen() {
+		initDisplay();
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		repaint();
+	}
+
+	/**
+	 * Run the game.
+	 */
+	public void displayGame() {
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				setVisible(true);
+			}
+		});
+	}
+
+	/**
+	 * Draw the display (cards and messages).
+	 */
+	public void repaint() {
+		pack();
+		panel.repaint();
+	}
+
+	/**
+	 * Initialize the display.
+	 */
+	private void initDisplay()	{
+		panel = new JPanel() {
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+			}
+		};
+		this.setSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+		panel.setLayout(null);
+		panel.setPreferredSize(
+			new Dimension(DEFAULT_WIDTH - 20, DEFAULT_HEIGHT - 20));
+		
+	startButton = new JButton();
+	startButton.setText("Start Game");
+	panel.add(startButton);
+	startButton.setBounds(BUTTON_LEFT, BUTTON_TOP, 100, 30);
+	startButton.addActionListener(this);
+	
+	pack();
+	getContentPane().add(panel);
+	getRootPane().setDefaultButton(startButton);
+	panel.setVisible(true);
+	}
+	private void signalError() {
+		Toolkit t = panel.getToolkit();
+		t.beep();
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(startButton)) {
+			Board board = new ElevensBoard();
+			CardGameGUI gui = new CardGameGUI(board);
+			gui.displayGame();
+		} else {
+			signalError();
+			return;
+		}
+	}
+	private class MyMouseListener implements MouseListener {
+
+		/**
+		 * Handle a mouse click on a card by toggling its "selected" property.
+		 * Each card is represented as a label.
+		 * @param e the mouse event.
+		 */
+		public void mouseClicked(MouseEvent e) {
+		}
+
+		/**
+		 * Ignore a mouse exited event.
+		 * @param e the mouse event.
+		 */
+		public void mouseExited(MouseEvent e) {
+		}
+
+		/**
+		 * Ignore a mouse released event.
+		 * @param e the mouse event.
+		 */
+		public void mouseReleased(MouseEvent e) {
+		}
+
+		/**
+		 * Ignore a mouse entered event.
+		 * @param e the mouse event.
+		 */
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		/**
+		 * Ignore a mouse pressed event.
+		 * @param e the mouse event.
+		 */
+		public void mousePressed(MouseEvent e) {
+		}
+	}
+}

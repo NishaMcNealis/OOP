@@ -1,0 +1,244 @@
+package InProgress;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
+public class StartScreen extends JFrame implements ActionListener{
+	/** Height of the game frame. */
+	private static final int DEFAULT_HEIGHT = 302;
+	/** Width of the game frame. */
+	private static final int DEFAULT_WIDTH = 800;
+	private static final int BUTTON_TOP = 150;
+	/** x coord of the "Replace" button. */
+	private static final int BUTTON_LEFT = 340;
+	/** Distance between the tops of the "Replace" and "Restart" buttons. */
+	private static final int BUTTON_HEIGHT_INC = 50;
+	/** The main panel containing the game components. */
+	private JPanel panel;
+	/** The Start button. */
+	private JButton startButton;
+	private JLabel startMsg;
+	/** The Rules button. */
+	private JButton rulesButton;
+	private JLabel rulesMsg;
+	private JLabel rulesCont;
+	private JLabel rulesThree;
+	/** The Exit Rules button. */
+	private JButton exitButton;
+	/** The Info button. */
+	private JButton infoButton;
+	private JLabel infoMsg;
+	/** The Exit Info button. */
+	private JButton exInfoButton;
+	
+	
+
+	/**
+	 * Initialize the GUI.
+	 * @param gameBoard is a <code>Board</code> subclass.
+	 */
+	public StartScreen() {
+		initDisplay();
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		repaint();
+	}
+
+	/**
+	 * Run the game.
+	 */
+	public void displayGame() {
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				setVisible(true);
+			}
+		});
+	}
+
+	/**
+	 * Draw the display (cards and messages).
+	 */
+	public void repaint() {
+		startMsg.setVisible(true);
+		pack();
+		panel.repaint();
+	}
+
+	/**
+	 * Initialize the display.
+	 */
+	private void initDisplay()	{
+		panel = new JPanel() {
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+			}
+		};
+		this.setSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+		panel.setLayout(null);
+		panel.setPreferredSize(
+			new Dimension(DEFAULT_WIDTH - 20, DEFAULT_HEIGHT - 20));
+		
+	startButton = new JButton();
+	startButton.setText("Start Game");
+	panel.add(startButton);
+	startButton.setBounds(BUTTON_LEFT, BUTTON_TOP, 100, 30);
+	startButton.addActionListener(this);
+	
+	startMsg = new JLabel("ELEVENS!");
+		panel.add(startMsg);
+		Font font = new Font("Lucida Sans Unicode", Font.BOLD, 60);
+		startMsg.setFont(font);
+		startMsg.setBounds(250, 50, 500, 100);
+		
+	rulesButton = new JButton();
+	rulesButton.setText("Rules");
+	panel.add(rulesButton);
+	rulesButton.setBounds(200, 200 + 100, 100, 30);
+	rulesButton.addActionListener(this);
+	
+	exitButton = new JButton();
+	exitButton.setText("Hide Rules");
+	panel.add(exitButton);
+	exitButton.setBounds(BUTTON_LEFT, BUTTON_TOP + 225, 100, 30);
+	exitButton.addActionListener(this);
+	exitButton.setVisible(false);
+	
+	rulesMsg = new JLabel();
+	rulesMsg.setBounds(440, 120, 1000, 30);
+	rulesMsg.setFont(new Font("SansSerif", Font.BOLD, 10));
+	rulesMsg.setForeground(Color.BLUE);
+	rulesMsg.setText("The object of the game is to discard every card in the deck. ");
+
+	panel.add(rulesMsg);
+	rulesMsg.setVisible(false);
+	
+	rulesCont = new JLabel();
+	rulesCont.setBounds(440, 135, 1000, 30);
+	rulesCont.setFont(new Font("SansSerif", Font.BOLD, 10));
+	rulesCont.setForeground(Color.BLUE);
+	rulesCont.setText("You can replace pairs of cards totaling eleven or "
+			+ "groups of face");
+
+	panel.add(rulesCont);
+	rulesCont.setVisible(false);
+	
+	rulesThree = new JLabel();
+	rulesThree.setBounds(440, 150, 1000, 30);
+	rulesThree.setFont(new Font("SansSerif", Font.BOLD, 10));
+	rulesThree.setForeground(Color.BLUE);
+	rulesThree.setText("cards (one Jack, one Queen, and one King).");
+
+	panel.add(rulesThree);
+	rulesThree.setVisible(false);
+	
+	infoButton = new JButton();
+	infoButton.setText("Information");
+	panel.add(infoButton);
+	infoButton.setBounds(100, 200 + 100, 100, 30);
+	infoButton.addActionListener(this);
+	
+	exInfoButton = new JButton();
+	exInfoButton.setText("Hide Info");
+	panel.add(exInfoButton);
+	exInfoButton.setBounds(BUTTON_LEFT, BUTTON_TOP + 225, 100, 30);
+	exInfoButton.addActionListener(this);
+	exInfoButton.setVisible(false); 
+	
+	infoMsg = new JLabel();
+	infoMsg.setBounds(440, 120, 1000, 30);
+	infoMsg.setFont(new Font("SansSerif", Font.BOLD, 10));
+	infoMsg.setForeground(Color.BLUE);
+	infoMsg.setText("By Nisha McNealis for Mr. Kuszmaul's OOP Class");
+
+	panel.add(rulesMsg);
+	rulesMsg.setVisible(false);
+	pack();
+	getContentPane().add(panel);
+	getRootPane().setDefaultButton(startButton);
+	panel.setVisible(true);
+	}
+	private void signalError() {
+		Toolkit t = panel.getToolkit();
+		t.beep();
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(startButton)) {
+			Board board = new ElevensBoard();
+			CardGameGUI gui = new CardGameGUI(board);
+			gui.displayGame();
+		} else if (e.getSource().equals(rulesButton)) {
+			rulesMsg.setVisible(true);
+			rulesCont.setVisible(true);
+			rulesThree.setVisible(true);
+			exitButton.setVisible(true);
+			repaint();
+		} else if (e.getSource().equals(exitButton)) {
+			rulesMsg.setVisible(false);
+			rulesCont.setVisible(false);
+			rulesThree.setVisible(false);
+			exitButton.setVisible(false);
+			repaint();
+		} else if (e.getSource().equals(infoButton)) {
+			infoMsg.setVisible(true);
+			exInfoButton.setVisible(true);
+			repaint();
+		} else if (e.getSource().equals(exInfoButton)) {
+			infoMsg.setVisible(false);
+			exInfoButton.setVisible(false);
+			repaint();
+		}else {
+			signalError();
+			return;
+		}
+	}
+	private class MyMouseListener implements MouseListener {
+
+		/**
+		 * Handle a mouse click on a card by toggling its "selected" property.
+		 * Each card is represented as a label.
+		 * @param e the mouse event.
+		 */
+		public void mouseClicked(MouseEvent e) {
+		}
+
+		/**
+		 * Ignore a mouse exited event.
+		 * @param e the mouse event.
+		 */
+		public void mouseExited(MouseEvent e) {
+		}
+
+		/**
+		 * Ignore a mouse released event.
+		 * @param e the mouse event.
+		 */
+		public void mouseReleased(MouseEvent e) {
+		}
+
+		/**
+		 * Ignore a mouse entered event.
+		 * @param e the mouse event.
+		 */
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		/**
+		 * Ignore a mouse pressed event.
+		 * @param e the mouse event.
+		 */
+		public void mousePressed(MouseEvent e) {
+		}
+	}
+}
