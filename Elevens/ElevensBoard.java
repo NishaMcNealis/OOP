@@ -99,69 +99,6 @@ public class ElevensBoard extends Board {
 		List<Integer> cIndexes = cardIndexes();
 		return containsPairSum11(cIndexes) || containsJQK(cIndexes);
 	}
-//		/* *** IMPLEMENTED IN ACTIVITY 9 *** */
-//		List<Card> selected = new ArrayList<Card>();
-//		for (Card c : getCards()) {
-//			System.out.println(c.getPoints());
-//			selected.add(ArrayList.indexOf(c));
-//			selected.add(getCards().in);
-//		}
-//		return (containsPairSum11(boardCards) || containsJQK(boardCards));
-//}
-//	public boolean anotherPlayIsPossible() {
-//		int len = getCards().length;
-//		if (deckSize() < 2){
-//			len -= 2;
-//		}
-//		for(Card card : getCards()){
-//			System.out.println(getCards().length);
-//			System.out.println("Card 1:" + card.getPoints());
-//			if (len >= 2){
-//			for (Card card2 : getCards()){
-//				System.out.println("Card 2: " + card2.getPoints());
-//				if (card.getPoints() + card2.getPoints() == 11) {
-//					System.out.println("here");
-//					return true;
-//				}
-//				//	if (card.getPoints() == 11){
-//						//if (card2.getPoints() == 12){
-//								for (Card card3 : getCards()){
-//									if (containsJQK(card, card2, card3) return true;
-//										System.out.println("Card 3: " + card2.getPoints());	
-//									//	if (card3.getPoints() == 13){
-//									//		return true;
-////					if (card.getPoints() == 11){
-////						if (card2.getPoints() == 12){
-////							if (card3.getPoints() == 13){
-////								return true;
-//							}
-//						}
-//					}
-//			}}
-//			}
-//		}
-//		return false;
-//	}
-//	@Override
-//	public boolean anotherPlayIsPossible() {
-//		for(Card card : getCards()){
-//			if(card == null) System.out.println("card is null");
-//			for (Card card2 : getCards()){
-//				if(card2 == null ) System.out.println("card2 is null");
-//				if (card.getPoints() + card2.getPoints() == 11) return true;
-//				for (Card card3 : getCards()){
-//					if (card.getPoints() == 11){
-//						if (card2.getPoints() == 12){
-//							if (card3.getPoints() == 13){
-//								return true;
-//							}
-//						}
-//					}
-//			}
-//			}
-//		}
-//		return false;
-//	}
 
 	/**
 	 * Check for an 11-pair in the selected cards.
@@ -181,27 +118,8 @@ public class ElevensBoard extends Board {
 				return true;
 		}
 			}
-//		for (int cardPosition = 0; cardPosition < selectedCards.size(); cardPosition++) {
-//			int k1 = selectedCards.get(cardPosition).intValue();
-//			for (int sk2 = cardPosition + 1; sk2 < selectedCards.size(); sk2++) {
-//				int k2 = selectedCards.get(sk2).intValue();
-//				if (cardAt(k1).getPoints() + cardAt(k2).getPoints() == 11) {
-//					return true;
-//				}
-//			}
-//		}
-		}
 		return false;
 	}
-//	private boolean containsPairSum11(List<Integer> selectedCards) {
-//		if (selectedCards.size() == 2){
-//			if (cards[selectedCards.get(0)].getPoints() + cards[selectedCards.get(1)].getPoints() == 11 && 
-//					cards[selectedCards.get(0)].getPoints() < 11 && cards[selectedCards.get(1)].getPoints() < 11){
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
 
 	/**
 	 * Check for a JQK in the selected cards.
@@ -228,45 +146,3 @@ public class ElevensBoard extends Board {
 		}
 		return foundJack && foundQueen && foundKing;
 	}
-//	private boolean containsJQK(List<Integer> selectedCards) {
-//		List<Card> temp = new ArrayList<Card>();
-//		for (int n = 0; n < 3; n++){
-//			temp.add(cards[selectedCards.get(n)]);		
-//	}
-//		if (selectedCards.size() == 3){
-//			for(Card card : temp){
-//				for (Card card2 : temp){
-//					if (card.getPoints() + card2.getPoints() == 11) return true;
-//					for (Card card3 : temp){
-//						if (card.getPoints() == 11){
-//							if (card2.getPoints() == 12){
-//								if (card3.getPoints() == 13){
-//									return true;
-//								}
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
-//		System.out.println("test2");
-//		return false;
-//	}
-}
-		//			for (int n = 0; n > 3; n++){
-//			if (cards[selectedCards.get(n)].getPoints() == 11){
-//				System.out.println("t28est");
-//				for (int k = 0; k > 3; k++){
-//					if (cards[selectedCards.get(k)].getPoints() == 12){
-//						System.out.println("t2est");
-//						for (int m = 0; m > 3; m++){
-//							System.out.println("tes3t");
-//							if (cards[selectedCards.get(m)].getPoints() == 13)
-//								System.out.println("te4st");
-//								return true;
-//							}
-//						}
-//					}
-//				}			}
-	
-		
